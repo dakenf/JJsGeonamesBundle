@@ -32,6 +32,16 @@ class State extends Locality
      */
     private $slug;
 
+    public function __toString(){
+        $return = $this->getNameUtf8();
+
+        $country = $this->getCountry();
+        if($country)
+            $return .= ', '.$country->getName();
+
+        return $return;
+    }
+
     /**
      * @return mixed
      */

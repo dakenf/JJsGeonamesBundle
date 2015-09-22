@@ -53,6 +53,20 @@ class City extends Locality
         $this->relation = new ArrayCollection();
     }
 
+    public function __toString(){
+        $return = $this->getNameUtf8();
+
+        $state = $this->getState();
+        if($state)
+            $return .= ', '.$state->getNameUtf8();
+
+        $country = $this->getCountry();
+        if($country)
+            $return .= ', '.$country->getName();
+
+        return $return;
+    }
+
     /**
      * Returns the state
      * 
