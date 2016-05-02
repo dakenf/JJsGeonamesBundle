@@ -74,14 +74,25 @@ class Country implements CountryInterface
      */
     public $phonePrefix;
 
-    public function __construct($code, $name, $domain, $postalCodeFormat, $postalCodeRegex, $phonePrefix)
+    /**
+     * GeoNames.org ID
+     *
+     * Uniquely identifies this locality for syncronization from data on
+     * GeoNames.org.
+     * @var integer
+     */
+    protected $geonameIdentifier;
+
+
+    public function __construct($code, $name, $domain, $postalCodeFormat, $postalCodeRegex, $phonePrefix, $geonameId)
     {
-        $this->code             = $code;
-        $this->name             = $name;
-        $this->domain           = $domain;
-        $this->postalCodeFormat = $postalCodeFormat;
-        $this->postalCodeRegex  = $postalCodeRegex;
-        $this->phonePrefix      = $phonePrefix;
+        $this->code              = $code;
+        $this->name              = $name;
+        $this->domain            = $domain;
+        $this->postalCodeFormat  = $postalCodeFormat;
+        $this->postalCodeRegex   = $postalCodeRegex;
+        $this->phonePrefix       = $phonePrefix;
+        $this->geonameIdentifier = $geonameId;
     }
 
     public function getCode()
@@ -119,5 +130,29 @@ class Country implements CountryInterface
     public function getPhonePrefix()
     {
         return $this->phonePrefix;
+    }
+
+    /**
+     * Returns the GeoNames.org identifier of this locality
+     *
+     * @return integer
+     */
+    public function getGeonameIdentifier()
+    {
+        return $this->geonameIdentifier;
+    }
+
+    /**
+     * Sets the GeoNames.org identifier of this locality
+     *
+     * @param integer $geonameIdentifier Identifier
+     *
+     * @return Locality
+     */
+    public function setGeonameIdentifier($geonameIdentifier)
+    {
+        $this->geonameIdentifier = $geonameIdentifier;
+
+        return $this;
     }
 }

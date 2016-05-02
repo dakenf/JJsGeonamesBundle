@@ -151,4 +151,9 @@ abstract class LocalityRepository extends EntityRepository implements LocalityRe
             $destination->setAdmin1Code($admin1Code);
         }
     }
+
+    public function persistLocality($locality){
+        $this->getEntityManager()->persist($locality);
+        $this->getEntityManager()->flush($locality);
+    }
 }

@@ -52,4 +52,11 @@ interface CountryInterface
      * @return string
      */
     function getPhonePrefix();
+
+    /**
+     * Returns the GeoNames.org identifier of this locality
+     *
+     * @return integer
+     */
+    public function getGeonameIdentifier();
 }

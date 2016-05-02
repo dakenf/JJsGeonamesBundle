@@ -10,6 +10,8 @@ use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\MappedSuperclass;
 use Doctrine\ORM\Mapping\Table;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
 
 /**
  * Geographical Locality
@@ -19,7 +21,7 @@ use Doctrine\ORM\Mapping\Table;
  * @MappedSuperclass()
  * @author Josiah <Josiah@jjs.id.au>
  */
-abstract class Locality
+abstract class Locality implements Translatable
 {
     /**
      * Locality Identifier
@@ -55,6 +57,7 @@ abstract class Locality
      * Name (UTF-8 encoded)
      *
      * @Column(name="name_utf8", type="string")
+     * @Gedmo\Translatable
      * @var string
      */
     protected $nameUtf8;
@@ -114,6 +117,13 @@ abstract class Locality
      * @var string
      */
     protected $admin1Code;
+
+    /**
+     * @Gedmo\Locale
+     * Used locale to override Translation listener`s locale
+     * this is not a mapped field of entity metadata, just a simple property
+     */
+    protected $locale;
 
     /**
      * Creates a new locality
@@ -355,5 +365,10 @@ abstract class Locality
         $this->admin1Code = $admin1Code;
 
         return $this;
+    }
+
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
     }
 }

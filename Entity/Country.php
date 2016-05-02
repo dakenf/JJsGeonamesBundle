@@ -13,7 +13,10 @@ use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\OneToOne;
 use Doctrine\ORM\Mapping\Table;
+use Doctrine\ORM\Mapping\Index;
+use Gedmo\Translatable\Translatable;
 use JJs\Bundle\GeonamesBundle\Model\CountryInterface;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Country
@@ -22,10 +25,13 @@ use JJs\Bundle\GeonamesBundle\Model\CountryInterface;
  * the largest geographical categorization.
  *
  * @Entity(repositoryClass="CountryRepository")
- * @Table(name="geo_country")
+ * @Table(name="geo_country", indexes={
+ *      @Index(name="geoname_id", columns={"geoname_id"})
+ * })))
+ * @Gedmo\TranslationEntity(class="CountryTranslation")
  * @author Josiah <josiah@jjs.id.au>
  */
-class Country implements CountryInterface
+class Country implements CountryInterface, Translatable
 {
     /**
      * Unique identifier which represents the country in the local database.
@@ -46,9 +52,21 @@ class Country implements CountryInterface
     protected $code;
 
     /**
+     * GeoNames.org ID
+     *
+     * Uniquely identifies this locality for syncronization from data on
+     * GeoNames.org.
+     *
+     * @Column(name="geoname_id", type="integer", nullable=true)
+     * @var integer
+     */
+    protected $geonameIdentifier;
+
+    /**
      * Name
      *
      * @Column(length=50, unique=true)
+     * @Gedmo\Translatable
      * @var string
      */
     protected $name;
@@ -87,6 +105,13 @@ class Country implements CountryInterface
      * @var string
      */
     protected $phonePrefix;
+
+    /**
+     * @Gedmo\Locale
+     * Used locale to override Translation listener`s locale
+     * this is not a mapped field of entity metadata, just a simple property
+     */
+    protected $locale;
 
     /**
      * Returns the unique identifier of this country in the local database
@@ -237,6 +262,35 @@ class Country implements CountryInterface
         $this->phonePrefix = $phonePrefix;
 
         return $this;
+    }
+
+    /**
+     * Returns the GeoNames.org identifier of this locality
+     *
+     * @return integer
+     */
+    public function getGeonameIdentifier()
+    {
+        return $this->geonameIdentifier;
+    }
+
+    /**
+     * Sets the GeoNames.org identifier of this locality
+     *
+     * @param integer $geonameIdentifier Identifier
+     *
+     * @return Locality
+     */
+    public function setGeonameIdentifier($geonameIdentifier)
+    {
+        $this->geonameIdentifier = $geonameIdentifier;
+
+        return $this;
+    }
+
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
     }
 
     public function __toString() {

@@ -24,6 +24,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  *      @ORM\Index(name="geoname_id", columns={"geoname_id"}),
  *      @ORM\Index(name="lat_lng", columns={"latitude", "longitude"}),
  * }))
+ * @Gedmo\TranslationEntity(class="CityTranslation")
  *
  * @author Josiah <josiah@jjs.id.au>
  */

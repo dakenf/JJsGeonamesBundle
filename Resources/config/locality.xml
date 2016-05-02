@@ -107,5 +107,11 @@
                 </argument>
             </call>
         </service>
+
+        <service id="geonames.altnames.loader" class="JJs\Bundle\GeonamesBundle\Data\AlternativeNamesLoader">
+            <argument id="geonames.country.repository" type="service" />
+            <argument id="geonames.state.repository" type="service" />
+            <argument id="geonames.city.repository" type="service" />
+        </service>
     </services>
 </container>

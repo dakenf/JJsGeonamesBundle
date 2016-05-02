@@ -26,7 +26,6 @@ namespace JJs\Bundle\GeonamesBundle\Command;
 
 use JJs\Bundle\GeonamesBundle\Data\LocalityLoader;
 use JJs\Bundle\GeonamesBundle\Export;
-use JJs\Common\Console\OutputLogger;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\TableHelper;
 use Symfony\Component\Console\Input\InputArgument;
@@ -115,6 +114,6 @@ class LoadLocalitiesCommand extends ContainerAwareCommand
 
         // Import the specified countries
         $progress = $this->getHelper('progress');
-        $importer->import($countries, $filter, new OutputLogger($output), $progress, $output);
+        $importer->import($countries, $filter, $this->getContainer()->get('logger'), $progress, $output);
     }
 }

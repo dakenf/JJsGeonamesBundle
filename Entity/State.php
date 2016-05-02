@@ -21,6 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @Entity(repositoryClass="StateRepository")
  * @Table(name="geo_state", indexes={@ORM\Index(name="geoname_id", columns={"geoname_id"})}))
+ * @Gedmo\TranslationEntity(class="StateTranslation")
  * @author Josiah <josiah@jjs.id.au>
  */
 class State extends Locality
