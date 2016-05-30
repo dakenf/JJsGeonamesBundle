@@ -20,7 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
  * 'province' for some countries.
  *
  * @Entity(repositoryClass="StateRepository")
- * @Table(name="geo_state", indexes={@ORM\Index(name="geoname_id", columns={"geoname_id"})}))
+ * @Table(name="geo_state", indexes={@ORM\Index(name="state_geoname_id", columns={"geoname_id"})}))
  * @Gedmo\TranslationEntity(class="StateTranslation")
  * @author Josiah <josiah@jjs.id.au>
  */

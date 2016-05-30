@@ -21,8 +21,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * @Entity(repositoryClass="CityRepository")
  * @Table(name="geo_city", indexes={
- *      @ORM\Index(name="geoname_id", columns={"geoname_id"}),
- *      @ORM\Index(name="lat_lng", columns={"latitude", "longitude"}),
+ *      @ORM\Index(name="city_geoname_id", columns={"geoname_id"}),
+ *      @ORM\Index(name="city_lat_lng", columns={"latitude", "longitude"}),
  * }))
  * @Gedmo\TranslationEntity(class="CityTranslation")
  *

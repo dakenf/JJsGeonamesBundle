@@ -26,7 +26,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @Entity(repositoryClass="CountryRepository")
  * @Table(name="geo_country", indexes={
- *      @Index(name="geoname_id", columns={"geoname_id"})
+ *      @Index(name="country_geoname_id", columns={"geoname_id"})
  * })))
  * @Gedmo\TranslationEntity(class="CountryTranslation")
  * @author Josiah <josiah@jjs.id.au>
