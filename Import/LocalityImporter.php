@@ -26,7 +26,7 @@ namespace JJs\Bundle\GeonamesBundle\Import;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Guzzle\Http\Client as HttpClient;
+use GuzzleHttp\Client as HttpClient;
 use InvalidArgumentException;
 use JJs\Bundle\GeonamesBundle\Entity\City;
 use JJs\Bundle\GeonamesBundle\Entity\State;
@@ -370,9 +370,7 @@ class LocalityImporter
         // check whether the archive is out of date
         if ($this->isImportPathHttp()) {
             $http = $this->getHttpClient();
-            $request = $http->head($importArchive);
-            $request->setHeader('If-Modified-Since', date('r', $cacheTimestamp));
-            $response = $request->send();
+            $response = $http->head($importArchive, ['headers' => ['If-Modified-Since', date('r', $cacheTimestamp)]]);
 
             // Based on the result of the head request indicate whether the
             // cache is stale

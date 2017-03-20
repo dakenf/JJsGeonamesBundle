@@ -16,8 +16,8 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=5.4.0",
-        "guzzle/guzzle": "~3.5",
-        "symfony/framework-bundle": "~2.1",
+        "guzzlehttp/guzzle": "~5.0|~6.0",
+        "symfony/framework-bundle": "~2.7|~3.0",
         "gedmo/doctrine-extensions": "^2.4"
     },
     "require-dev": {

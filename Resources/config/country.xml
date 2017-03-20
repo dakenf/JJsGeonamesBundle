@@ -5,9 +5,8 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <!-- Country Repository -->
-        <service id="geonames.country.entity_repository" class="JJs\Bundle\GeonamesBundle\Entity\CountryRepository"
-            factory-service="doctrine.orm.entity_manager"
-            factory-method="getRepository">
+        <service id="geonames.country.entity_repository" class="JJs\Bundle\GeonamesBundle\Entity\CountryRepository">
+            <factory service="doctrine.orm.entity_manager" method="getRepository" />
             <argument>JJs\Bundle\GeonamesBundle\Entity\Country</argument>
         </service>
 
